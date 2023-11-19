@@ -1,0 +1,58 @@
+html, body{
+    margin: 0;
+}
+
+body{
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+nav ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    width: max-content;
+}
+
+nav ul li{
+    margin: 0.25rem;
+    cursor: pointer;
+}
+
+.content{
+    margin-left: 1rem;
+}
+
+.lobby{
+    display: block;
+}
+
+.mainLobby {
+    display: block;
+}
+
+.inLobby {
+    display: none;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+}
+  
+th, td {
+    padding: 8px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+tbody:nth-child(2n) {
+    background-color: #f2f2f2;
+}
+
+.settings{
+    display: none;
+}
