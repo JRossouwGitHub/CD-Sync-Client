@@ -9,64 +9,74 @@
         <link rel="stylesheet" href="style.css">
     </head>
     <body>
-        <nav>
-            <ul>
-                <li onclick="toggleDisplay(1)">Lobby</li>
-                <li onclick="toggleDisplay(2)">Settings</li>
-            </ul>
-        </nav>
-        <hr />
-        <div class="lobby content" id="lobby">
-            <div class="mainLobby" id="mainLobby">
-                <h3>Create or Join a Lobby:</h3>
-                <div class="create">
-                    <input id="lobbyName" type="text" placeholder="Lobby Name..." maxlength="25" />
-                    <button onclick="createLobby()" id="createBtn" disabled>Create</button>
+        <div class="original" id="original">
+
+            <nav>
+                <ul>
+                    <li onclick="toggleDisplay(1)">Lobby</li>
+                    <li onclick="toggleDisplay(2)">Settings</li>
+                </ul>
+            </nav>
+            <hr />
+            <div class="lobby content" id="lobby">
+                <div class="mainLobby" id="mainLobby">
+                    <h3>Create or Join a Lobby:</h3>
+                    <div class="create">
+                        <input id="lobbyName" type="text" placeholder="Lobby Name..." maxlength="25" />
+                        <button onclick="createLobby()" id="createBtn" disabled>Create</button>
+                    </div>
+                    <hr />
+                    <div class="join">
+                        <input id="search" type="text" placeholder="Search..." />
+                        <br><br>
+                        <div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Lobby Name</th>
+                                        <th>Players</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody id="lobbyList">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
                 </div>
-                <hr />
-                <div class="join">
-                    <input id="search" type="text" placeholder="Search..." />
-                    <br><br>
-                    <div>
+                <div class="inLobby" id="inLobby">
+                    <div id="lobbyInfo">
+                        <div id="lobbyBtns">
+                            <button id="leaveBtn" style="float: left;">Leave</button>
+                        </div>
+                        <br>
+                        <h2 id="lobbyInfoName"></h2>
                         <table>
                             <thead>
                                 <tr>
-                                    <th>Lobby Name</th>
-                                    <th>Players</th>
-                                    <th></th>
+                                    <th>Username</th>
+                                    <th>Ability 1</th>
+                                    <th>Ability 2</th>
+                                    <th>Ability 3</th>
+                                    <th>Ability 4</th>
+                                    <th>Ability 5</th>
+                                    <th>Ability 6</th>
+                                    <th>Toggle</th>
                                 </tr>
                             </thead>
-                            <tbody id="lobbyList">
+                            <tbody id="playerList">
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div>
-            <div class="inLobby" id="inLobby">
-                <div id="lobbyInfo">
-                    <button id="leaveBtn">Leave</button>
-                    <h2 id="lobbyInfoName"></h2>
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Username</th>
-                                <th>Ability 1</th>
-                                <th>Ability 2</th>
-                                <th>Ability 3</th>
-                                <th>Ability 4</th>
-                                <th>Ability 5</th>
-                                <th>Ability 6</th>
-                                <th>Toggle</th>
-                            </tr>
-                        </thead>
-                        <tbody id="playerList">
-                        </tbody>
-                    </table>
-                </div>
+            <div class="settings content" id="settings">
+                <h3>Update your Settings:</h3>
             </div>
         </div>
-        <div class="settings content" id="settings">
-            <h3>Update your Settings:</h3>
+        <div class="inGame content" id="inGame">
+            <div style="float: right; cursor: pointer;">&#10006;</div>
+            <div id="inGamePlayerList"></div>
         </div>
         <script src="renderer.js"></script>
     </body>

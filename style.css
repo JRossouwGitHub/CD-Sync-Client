@@ -24,6 +24,7 @@ nav ul li{
 
 .content{
     margin-left: 1rem;
+    margin-right: 1rem;
 }
 
 .lobby{
@@ -54,5 +55,9 @@ tbody:nth-child(2n) {
 }
 
 .settings{
+    display: none;
+}
+
+.inGame {
     display: none;
 }
