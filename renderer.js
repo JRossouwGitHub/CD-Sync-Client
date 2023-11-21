@@ -20,9 +20,9 @@ setInterval(() => {
     socket.emit('message', JSON.stringify({event: 'lobbies', payload: {}}))
 }, 1000)
 
-window.addEventListener("keypress", (e) => {
+function listen_keypress(key){
     if(inLobby){
-        let key = e.key.toLowerCase()
+        key = key.toLowerCase()
         for(const [prop, value] of Object.entries(clientPlayer)){
             if(typeof value === 'object' && value !== null && value.key?.toLowerCase() == key){
                 if(clientPlayer[prop].cooldown == clientPlayer[prop].cooldownMax){
@@ -55,7 +55,7 @@ window.addEventListener("keypress", (e) => {
             }
         }
     }
-})
+}
 
 const toggleDisplay = (id) => {
     lobby.style.display = id === 1 ? 'block' : 'none'

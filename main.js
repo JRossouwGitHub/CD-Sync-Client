@@ -1,6 +1,9 @@
 const { app, BrowserWindow, ipcMain } = require('electron')
 // include the Node.js 'path' module at the top of your file
 const path = require('node:path')
+const {GlobalKeyboardListener} = require("node-global-key-listener")
+const v = new GlobalKeyboardListener();
+let keyPressEnabled = false
 
 // modify your existing createWindow() function
 const createWindow = () => {
@@ -25,14 +28,24 @@ const createWindow = () => {
     ipcMain.on('toggle', (event, width, height, onTop) => {
         win.setSize(width, height)
         win.setAlwaysOnTop(onTop)
+        keyPressEnabled = onTop
     })
 
     win.loadFile('index.html')
-    //win.webContents.openDevTools()
+    return win
 }
 
 app.whenReady().then(() => {
-    createWindow()
+    let _win = createWindow()
+    v.addListener(function (e, down) {
+        if(!keyPressEnabled) return
+
+        if (down) {
+            _win.webContents.executeJavaScript(`
+                listen_keypress("${e.name}");
+            `)
+        } 
+    });
 })
 
 app.on('window-all-closed', () => {
