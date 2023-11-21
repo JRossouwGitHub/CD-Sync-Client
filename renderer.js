@@ -6,6 +6,11 @@ const createBtn = document.getElementById('createBtn')
 const search = document.getElementById('search')
 const lobbyList = document.getElementById('lobbyList')
 const lobbyInfo = document.getElementById('lobbyInfo')
+const appExitBtn = document.getElementById('appExitBtn')
+
+appExitBtn.addEventListener('click', () => {
+    api.close()
+})
 
 let clientPlayer = null
 let lobbies = []
@@ -20,32 +25,33 @@ window.addEventListener("keypress", (e) => {
         let key = e.key.toLowerCase()
         for(const [prop, value] of Object.entries(clientPlayer)){
             if(typeof value === 'object' && value !== null && value.key?.toLowerCase() == key){
-                let lobbyID  
-                lobbies.map((lobby) => {
-                    lobby.players.map((player) => {
-                        if(player.id == clientPlayer.id){
-                            lobbyID = lobby.id
-                        }
+                if(clientPlayer[prop].cooldown == clientPlayer[prop].cooldownMax){
+                    let lobbyID  
+                    lobbies.map((lobby) => {
+                        lobby.players.map((player) => {
+                            if(player.id == clientPlayer.id){
+                                lobbyID = lobby.id
+                            }
+                        })
                     })
-                })
-                socket.emit('message', JSON.stringify({event: 'cast', payload: {lobbyID: lobbyID, ability: prop.toString()}}))
-                let cdInit = clientPlayer[prop].cooldown
-                let interval = setInterval(() => {
-                    clientPlayer[prop].cooldown -= 0.01
-                    let playerDiv = document.getElementById(clientPlayer.id)
-                    let cdDiv
-                    for(let i = 0; i < playerDiv.childNodes.length; i++){
-                        if(playerDiv.childNodes[i].id?.toLowerCase() == clientPlayer[prop].key.toLowerCase()){
-                            cdDiv = playerDiv.childNodes[i]
-                            break
+                    socket.emit('message', JSON.stringify({event: 'cast', payload: {lobbyID: lobbyID, ability: prop.toString()}}))
+                    let interval = setInterval(() => {
+                        clientPlayer[prop].cooldown -= 0.01
+                        let playerDiv = document.getElementById(clientPlayer.id)
+                        let cdDiv
+                        for(let i = 0; i < playerDiv.childNodes.length; i++){
+                            if(playerDiv.childNodes[i].id?.toLowerCase() == clientPlayer[prop].key.toLowerCase()){
+                                cdDiv = playerDiv.childNodes[i]
+                                break
+                            }
                         }
-                    }
-                    cdDiv.innerHTML = clientPlayer[prop].cooldown.toFixed(2)
-                    if(startCooldown(interval, clientPlayer[prop].cooldown)){
-                        clientPlayer[prop].cooldown = cdInit
                         cdDiv.innerHTML = clientPlayer[prop].cooldown.toFixed(2)
-                    }
-                }, 10)
+                        if(startCooldown(interval, clientPlayer[prop].cooldown)){
+                            clientPlayer[prop].cooldown = clientPlayer[prop].cooldownMax
+                            cdDiv.innerHTML = clientPlayer[prop].cooldown.toFixed(2)
+                        }
+                    }, 10)
+                }
             }
         }
     }
@@ -61,27 +67,33 @@ const getSettings = () => {
         username: null,
         ability1: {
             key: 'Q',
-            cooldown: 1
+            cooldown: 1,
+            cooldownMax: 1
         },
         ability2: {
             key: 'W',
-            cooldown: 5
+            cooldown: 5,
+            cooldownMax: 5
         },
         ability3: {
             key: 'E',
-            cooldown: 10
+            cooldown: 10,
+            cooldownMax: 10
         },
         ability4: {
             key: 'R',
-            cooldown: 15
+            cooldown: 15,
+            cooldownMax: 15
         },
         ability5: {
             key: 'D',
-            cooldown: 20
+            cooldown: 20,
+            cooldownMax: 20
         },
         ability6: {
             key: 'F',
-            cooldown: 25
+            cooldown: 25,
+            cooldownMax: 25
         }
     }
 }
@@ -133,9 +145,25 @@ const joinLobby = (id) => {
 }
 
 const startGame = (lobbyID) => {
-    document.getElementById("original").style.display = "none"
-    document.getElementById("inGame").style.display = "block"
+    let original = document.getElementById("original")
+    let inGame = document.getElementById("inGame")
+    original.style.display = "none"
+    inGame.style.display = "block"
+    let inGameNav = document.getElementById("inGameNav") || document.createElement('nav')
+    inGameNav.id = "inGameNav"
+    inGameNav.innerHTML = ''
+    let exitBtn = document.getElementById('exitBtn') || document.createElement('span')
+    exitBtn.id = 'exitBtn'
+    exitBtn.innerHTML = '&#10006;<br>'
+    exitBtn.style.cursor = 'pointer'
+    exitBtn.onclick = () => {
+        original.style.display = "block"
+        inGame.style.display = "none"
+        api.toggle(800, 600, false)
+    }
+    inGameNav.appendChild(exitBtn)
     let list = document.getElementById("inGamePlayerList")
+    inGame.insertBefore(inGameNav, list)
     list.innerHTML = ''
     lobbies.map((lobby) => {
         if(lobby.id == lobbyID){
@@ -195,13 +223,14 @@ const startGame = (lobbyID) => {
 
                 span = document.createElement('span')
                 span.id = player.ability6.key
-                span.innerHTML = player.ability6.cooldown.toFixed(2)
+                span.innerHTML = player.ability6.cooldown.toFixed(2) + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
                 div.appendChild(span)
                 
                 list.appendChild(div)
             })
         }
     })
+    api.toggle(inGame.clientWidth, inGame.clientHeight, true)
 }
 
 const showLobby = (data) => {

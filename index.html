@@ -10,14 +10,14 @@
     </head>
     <body>
         <div class="original" id="original">
-
             <nav>
+                <span id="appExitBtn" style="float: right; cursor: pointer">&#10006;</span>
                 <ul>
-                    <li onclick="toggleDisplay(1)">Lobby</li>
+                    <li onclick="toggleDisplay(1)">Lobby</li> |
                     <li onclick="toggleDisplay(2)">Settings</li>
                 </ul>
+                <hr />
             </nav>
-            <hr />
             <div class="lobby content" id="lobby">
                 <div class="mainLobby" id="mainLobby">
                     <h3>Create or Join a Lobby:</h3>
@@ -74,9 +74,8 @@
                 <h3>Update your Settings:</h3>
             </div>
         </div>
-        <div class="inGame content" id="inGame">
-            <div style="float: right; cursor: pointer;">&#10006;</div>
-            <div id="inGamePlayerList"></div>
+        <div class="inGame content noselect" id="inGame">
+            <div id="inGamePlayerList" class="noselect"></div>
         </div>
         <script src="renderer.js"></script>
     </body>
