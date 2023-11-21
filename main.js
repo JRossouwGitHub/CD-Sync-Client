@@ -29,6 +29,9 @@ const createWindow = () => {
         win.setSize(width, height)
         win.setAlwaysOnTop(onTop)
         keyPressEnabled = onTop
+        if(!onTop){
+            win.center()
+        }
     })
 
     win.loadFile('index.html')
@@ -37,6 +40,9 @@ const createWindow = () => {
 
 app.whenReady().then(() => {
     let _win = createWindow()
+    _win.webContents.executeJavaScript(`
+        loadSettings();
+    `)
     v.addListener(function (e, down) {
         if(!keyPressEnabled) return
 

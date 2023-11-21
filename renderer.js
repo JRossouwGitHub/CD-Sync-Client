@@ -45,10 +45,10 @@ function listen_keypress(key){
                                 break
                             }
                         }
-                        cdDiv.innerHTML = clientPlayer[prop].cooldown.toFixed(2)
+                        cdDiv.innerHTML = parseFloat(clientPlayer[prop].cooldown).toFixed(2)
                         if(startCooldown(interval, clientPlayer[prop].cooldown)){
                             clientPlayer[prop].cooldown = clientPlayer[prop].cooldownMax
-                            cdDiv.innerHTML = clientPlayer[prop].cooldown.toFixed(2)
+                            cdDiv.innerHTML = parseFloat(clientPlayer[prop].cooldown).toFixed(2)
                         }
                     }, 10)
                 }
@@ -62,38 +62,58 @@ const toggleDisplay = (id) => {
     settings.style.display = id === 2 ? 'block' : 'none'
 }
 
+const setSettings = (input) => {
+    localStorage.setItem(input.id, input.value)
+}
+
+const loadSettings = () => {
+    document.getElementById('username').value = localStorage.getItem('username') ?? null
+    document.getElementById('ability1_key').value = localStorage.getItem('ability1_key') ?? null
+    document.getElementById('ability1_cooldown').value = localStorage.getItem('ability1_cooldown') ?? null
+    document.getElementById('ability2_key').value = localStorage.getItem('ability2_key') ?? null
+    document.getElementById('ability2_cooldown').value = localStorage.getItem('ability2_cooldown') ?? null
+    document.getElementById('ability3_key').value = localStorage.getItem('ability3_key') ?? null
+    document.getElementById('ability3_cooldown').value = localStorage.getItem('ability3_cooldown') ?? null
+    document.getElementById('ability4_key').value = localStorage.getItem('ability4_key') ?? null
+    document.getElementById('ability4_cooldown').value = localStorage.getItem('ability4_cooldown') ?? null
+    document.getElementById('ability5_key').value = localStorage.getItem('ability5_key') ?? null
+    document.getElementById('ability5_cooldown').value = localStorage.getItem('ability5_cooldown') ?? null
+    document.getElementById('ability6_key').value = localStorage.getItem('ability6_key') ?? null
+    document.getElementById('ability6_cooldown').value = localStorage.getItem('ability6_cooldown') ?? null
+}
+
 const getSettings = () => {
     return {
-        username: null,
+        username: document.getElementById('username').value != '' ? document.getElementById('username').value : null,
         ability1: {
-            key: 'Q',
-            cooldown: 1,
-            cooldownMax: 1
+            key: document.getElementById('ability1_key').value != '' ? document.getElementById('ability1_key').value : 'Q',
+            cooldown: document.getElementById('ability1_cooldown').value != '' ? document.getElementById('ability1_cooldown').value : 1,
+            cooldownMax: document.getElementById('ability1_cooldown').value != '' ? document.getElementById('ability1_cooldown').value :  1
         },
         ability2: {
-            key: 'W',
-            cooldown: 5,
-            cooldownMax: 5
+            key: document.getElementById('ability2_key').value != '' ? document.getElementById('ability2_key').value : 'W',
+            cooldown: document.getElementById('ability2_cooldown').value != '' ? document.getElementById('ability2_cooldown').value : 5,
+            cooldownMax: document.getElementById('ability2_cooldown').value != '' ? document.getElementById('ability2_cooldown').value :  5
         },
         ability3: {
-            key: 'E',
-            cooldown: 10,
-            cooldownMax: 10
+            key: document.getElementById('ability3_key').value != '' ? document.getElementById('ability3_key').value : 'E',
+            cooldown: document.getElementById('ability3_cooldown').value != '' ? document.getElementById('ability3_cooldown').value : 10,
+            cooldownMax: document.getElementById('ability3_cooldown').value != '' ? document.getElementById('ability3_cooldown').value :  10
         },
         ability4: {
-            key: 'R',
-            cooldown: 15,
-            cooldownMax: 15
+            key: document.getElementById('ability4_key').value != '' ? document.getElementById('ability4_key').value : 'R',
+            cooldown: document.getElementById('ability4_cooldown').value != '' ? document.getElementById('ability4_cooldown').value : 15,
+            cooldownMax: document.getElementById('ability4_cooldown').value != '' ? document.getElementById('ability4_cooldown').value :  15
         },
         ability5: {
-            key: 'D',
-            cooldown: 20,
-            cooldownMax: 20
+            key: document.getElementById('ability5_key').value != '' ? document.getElementById('ability5_key').value : 'D',
+            cooldown: document.getElementById('ability5_cooldown').value != '' ? document.getElementById('ability5_cooldown').value : 20,
+            cooldownMax: document.getElementById('ability5_cooldown').value != '' ? document.getElementById('ability5_cooldown').value :  30
         },
         ability6: {
-            key: 'F',
-            cooldown: 25,
-            cooldownMax: 25
+            key: document.getElementById('ability6_key').value != '' ? document.getElementById('ability6_key').value : 'F',
+            cooldown: document.getElementById('ability6_cooldown').value != '' ? document.getElementById('ability6_cooldown').value : 25,
+            cooldownMax: document.getElementById('ability6_cooldown').value != '' ? document.getElementById('ability6_cooldown').value :  25
         }
     }
 }
@@ -178,7 +198,7 @@ const startGame = (lobbyID) => {
 
                 span = document.createElement('span')
                 span.id = player.ability1.key
-                span.innerHTML = player.ability1.cooldown.toFixed(2)
+                span.innerHTML = parseFloat(player.ability1.cooldown).toFixed(2)
                 div.appendChild(span)
 
                 span = document.createElement('span')
@@ -187,7 +207,7 @@ const startGame = (lobbyID) => {
                 
                 span = document.createElement('span')
                 span.id = player.ability2.key
-                span.innerHTML = player.ability2.cooldown.toFixed(2)
+                span.innerHTML = parseFloat(player.ability2.cooldown).toFixed(2)
                 div.appendChild(span)
 
                 span = document.createElement('span')
@@ -196,7 +216,7 @@ const startGame = (lobbyID) => {
 
                 span = document.createElement('span')
                 span.id = player.ability3.key
-                span.innerHTML = player.ability3.cooldown.toFixed(2)
+                span.innerHTML = parseFloat(player.ability3.cooldown).toFixed(2)
                 div.appendChild(span)
 
                 span = document.createElement('span')
@@ -205,7 +225,7 @@ const startGame = (lobbyID) => {
 
                 span = document.createElement('span')
                 span.id = player.ability4.key
-                span.innerHTML = player.ability4.cooldown.toFixed(2)
+                span.innerHTML = parseFloat(player.ability4.cooldown).toFixed(2)
                 div.appendChild(span)
 
                 span = document.createElement('span')
@@ -214,7 +234,7 @@ const startGame = (lobbyID) => {
 
                 span = document.createElement('span')
                 span.id = player.ability5.key
-                span.innerHTML = player.ability5.cooldown.toFixed(2)
+                span.innerHTML = parseFloat(player.ability5.cooldown).toFixed(2)
                 div.appendChild(span)
 
                 span = document.createElement('span')
@@ -223,7 +243,7 @@ const startGame = (lobbyID) => {
 
                 span = document.createElement('span')
                 span.id = player.ability6.key
-                span.innerHTML = player.ability6.cooldown.toFixed(2) + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
+                span.innerHTML = parseFloat(player.ability6.cooldown).toFixed(2) + '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;'
                 div.appendChild(span)
                 
                 list.appendChild(div)
@@ -231,6 +251,15 @@ const startGame = (lobbyID) => {
         }
     })
     api.toggle(inGame.clientWidth, inGame.clientHeight, true)
+}
+
+const togglePlayer = (lobbyID, player, prop = null) => {
+    if(prop){
+        player[prop].enabled = !player[prop].enabled
+    } else {
+        player.enabled = !player.enabled
+    }
+    socket.emit('message', JSON.stringify({event: 'toggle', payload: {lobbyID: lobbyID, player: player}}))
 }
 
 const showLobby = (data) => {
@@ -273,6 +302,9 @@ const showLobby = (data) => {
             checkbox.type = 'checkbox'
             checkbox.checked = player.ability1.enabled
             checkbox.disabled = !owner
+            checkbox.onclick = () => {
+                togglePlayer(data.id, player, 'ability1')
+            }
             td = document.createElement('td')
             td.appendChild(checkbox)
             tr.appendChild(td)
@@ -281,6 +313,9 @@ const showLobby = (data) => {
             checkbox.type = 'checkbox'
             checkbox.checked = player.ability2.enabled
             checkbox.disabled = !owner
+            checkbox.onclick = () => {
+                togglePlayer(data.id, player, 'ability2')
+            }
             td = document.createElement('td')
             td.appendChild(checkbox)
             tr.appendChild(td)
@@ -289,6 +324,9 @@ const showLobby = (data) => {
             checkbox.type = 'checkbox'
             checkbox.checked = player.ability3.enabled
             checkbox.disabled = !owner
+            checkbox.onclick = () => {
+                togglePlayer(data.id, player, 'ability3')
+            }
             td = document.createElement('td')
             td.appendChild(checkbox)
             tr.appendChild(td)
@@ -297,6 +335,9 @@ const showLobby = (data) => {
             checkbox.type = 'checkbox'
             checkbox.checked = player.ability4.enabled
             checkbox.disabled = !owner
+            checkbox.onclick = () => {
+                togglePlayer(data.id, player, 'ability4')
+            }
             td = document.createElement('td')
             td.appendChild(checkbox)
             tr.appendChild(td)
@@ -305,6 +346,9 @@ const showLobby = (data) => {
             checkbox.type = 'checkbox'
             checkbox.checked = player.ability5.enabled
             checkbox.disabled = !owner
+            checkbox.onclick = () => {
+                togglePlayer(data.id, player, 'ability5')
+            }
             td = document.createElement('td')
             td.appendChild(checkbox)
             tr.appendChild(td)
@@ -313,6 +357,9 @@ const showLobby = (data) => {
             checkbox.type = 'checkbox'
             checkbox.checked = player.ability6.enabled
             checkbox.disabled = !owner
+            checkbox.onclick = () => {
+                togglePlayer(data.id, player, 'ability6')
+            }
             td = document.createElement('td')
             td.appendChild(checkbox)
             tr.appendChild(td)
@@ -321,6 +368,9 @@ const showLobby = (data) => {
             checkbox.type = 'checkbox'
             checkbox.checked = player.enabled
             checkbox.disabled = !owner
+            checkbox.onclick = () => {
+                togglePlayer(data.id, player)
+            }
             td = document.createElement('td')
             td.appendChild(checkbox)
             tr.appendChild(td)
@@ -385,10 +435,10 @@ socket.on('broadcast', (data) => {
                                                 break
                                             }
                                         }
-                                        cdDiv.innerHTML = player[prop].cooldown.toFixed(2)
+                                        cdDiv.innerHTML = parseFloat(player[prop].cooldown).toFixed(2)
                                         if(startCooldown(interval, player[prop].cooldown)){
                                             player[prop].cooldown = cdInit
-                                            cdDiv.innerHTML = player[prop].cooldown.toFixed(2)
+                                            cdDiv.innerHTML = parseFloat(player[prop].cooldown).toFixed(2)
                                         }
                                     }, 10)
                                 }
@@ -397,7 +447,10 @@ socket.on('broadcast', (data) => {
                     })
                 })
                 break;
-            case payload.message == 'Lobby started.':
+            case payload.message.includes('Toggled cooldowns'):
+                showLobby(payload.data)
+                break;
+            case payload.message.includes('Lobby started.'):
                 startGame(payload.data.id)
                 break;
             default:
