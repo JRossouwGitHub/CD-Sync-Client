@@ -1,4 +1,4 @@
-const socket = io('http://localhost:5500')
+const socket = io('http://cdsync.palmtop.co.nz:3000')
 const lobby = document.getElementById('lobby')
 const settings = document.getElementById('settings')
 const lobbyName = document.getElementById('lobbyName')
