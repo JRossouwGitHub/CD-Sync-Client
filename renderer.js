@@ -7,6 +7,7 @@ const search = document.getElementById('search')
 const lobbyList = document.getElementById('lobbyList')
 const lobbyInfo = document.getElementById('lobbyInfo')
 const appExitBtn = document.getElementById('appExitBtn')
+const updateBtn = document.getElementById('updateBtn')
 
 appExitBtn.addEventListener('click', () => {
     api.close()
@@ -117,6 +118,10 @@ const getSettings = () => {
         }
     }
 }
+
+updateBtn.addEventListener("click", () => {
+    socket.emit('message', JSON.stringify({event: 'register', payload: getSettings()}))
+})
 
 lobbyName.addEventListener("keyup", () => {
     if(lobbyName.value.length >= 3){
