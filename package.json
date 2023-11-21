@@ -1,20 +1,26 @@
 {
   "name": "cd-sync-client",
   "version": "1.0.0",
-  "description": "",
+  "description": "A client to sync cooldowns between players.",
   "main": "main.js",
   "scripts": {
     "start": "electron .",
-    "build": "npx electron-packager ./ cd-sync-client --platform=win32 --arch=x64"
+    "package": "npx electron-packager ./ cd-sync-client --platform=win32 --arch=x64",
+    "app:dir": "electron-builder --dir",
+    "app:dist": "electron-builder"
   },
-  "author": "Jacques Rossouw",
+  "author": "Jacques Rossouw | PalmTop | Odious",
   "license": "ISC",
   "devDependencies": {
     "electron": "^27.1.0",
+    "electron-builder": "^24.6.4",
     "electron-packager": "^17.1.2",
     "nodemon": "^3.0.1"
   },
   "dependencies": {
     "node-global-key-listener": "^0.1.1"
+  },
+  "build": {
+    "appId": "com.cdsync-palmtop-co-nz.app"
   }
 }
