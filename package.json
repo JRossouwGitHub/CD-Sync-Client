@@ -21,6 +21,20 @@
     "node-global-key-listener": "^0.1.1"
   },
   "build": {
-    "appId": "com.cdsync-palmtop-co-nz.app"
+    "appId": "com.cdsync-palmtop-co-nz.app",
+    "productName": "CD Sync 1.0.0",
+    "win": {
+      "icon": "./public/icons/128x128.ico"
+    },
+    "files": [
+      "./build/**/*",
+      "./dist/**/*",
+      "./node_modules/**/*",
+      "./public/**/*",
+      "*.js"
+    ],
+    "directories": {
+      "buildResources": "public"
+    }
   }
 }

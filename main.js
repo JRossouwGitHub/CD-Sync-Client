@@ -10,15 +10,14 @@ const createWindow = () => {
     const win = new BrowserWindow({
         width: 800,
         height: 600,
-        maxWidth: 800,
-        maxHeight: 600,
-        minWidth: 400,
         autoHideMenuBar: true,
         frame: false,
         transparent: true,
+        titleBarStyle: 'hidden',
         webPreferences: {
             preload: path.join(__dirname, 'preload.js')
-        }
+        },
+        icon: __dirname + '/public/icons/128x128.ico',
     })
 
     ipcMain.on('close-app', () => {
@@ -27,10 +26,12 @@ const createWindow = () => {
 
     ipcMain.on('toggle', (event, width, height, onTop) => {
         win.setSize(width, height)
-        win.setAlwaysOnTop(onTop)
+        win.setAlwaysOnTop(onTop, "normal")
         keyPressEnabled = onTop
         if(!onTop){
             win.center()
+        } else {
+            win.moveTop()
         }
     })
 
