@@ -41,9 +41,6 @@ const createWindow = () => {
 
 app.whenReady().then(() => {
     let _win = createWindow()
-    _win.webContents.executeJavaScript(`
-        loadSettings();
-    `)
     v.addListener(function (e, down) {
         if(!keyPressEnabled) return
 

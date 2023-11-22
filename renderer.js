@@ -9,6 +9,23 @@ const lobbyInfo = document.getElementById('lobbyInfo')
 const appExitBtn = document.getElementById('appExitBtn')
 const updateBtn = document.getElementById('updateBtn')
 
+const loadSettings = () => {
+    document.getElementById('username').value = localStorage.getItem('username') ?? null
+    document.getElementById('ability1_key').value = localStorage.getItem('ability1_key') ?? null
+    document.getElementById('ability1_cooldown').value = localStorage.getItem('ability1_cooldown') ?? null
+    document.getElementById('ability2_key').value = localStorage.getItem('ability2_key') ?? null
+    document.getElementById('ability2_cooldown').value = localStorage.getItem('ability2_cooldown') ?? null
+    document.getElementById('ability3_key').value = localStorage.getItem('ability3_key') ?? null
+    document.getElementById('ability3_cooldown').value = localStorage.getItem('ability3_cooldown') ?? null
+    document.getElementById('ability4_key').value = localStorage.getItem('ability4_key') ?? null
+    document.getElementById('ability4_cooldown').value = localStorage.getItem('ability4_cooldown') ?? null
+    document.getElementById('ability5_key').value = localStorage.getItem('ability5_key') ?? null
+    document.getElementById('ability5_cooldown').value = localStorage.getItem('ability5_cooldown') ?? null
+    document.getElementById('ability6_key').value = localStorage.getItem('ability6_key') ?? null
+    document.getElementById('ability6_cooldown').value = localStorage.getItem('ability6_cooldown') ?? null
+}
+loadSettings()
+
 appExitBtn.addEventListener('click', () => {
     api.close()
 })
@@ -65,22 +82,6 @@ const toggleDisplay = (id) => {
 
 const setSettings = (input) => {
     localStorage.setItem(input.id, input.value)
-}
-
-const loadSettings = () => {
-    document.getElementById('username').value = localStorage.getItem('username') ?? null
-    document.getElementById('ability1_key').value = localStorage.getItem('ability1_key') ?? null
-    document.getElementById('ability1_cooldown').value = localStorage.getItem('ability1_cooldown') ?? null
-    document.getElementById('ability2_key').value = localStorage.getItem('ability2_key') ?? null
-    document.getElementById('ability2_cooldown').value = localStorage.getItem('ability2_cooldown') ?? null
-    document.getElementById('ability3_key').value = localStorage.getItem('ability3_key') ?? null
-    document.getElementById('ability3_cooldown').value = localStorage.getItem('ability3_cooldown') ?? null
-    document.getElementById('ability4_key').value = localStorage.getItem('ability4_key') ?? null
-    document.getElementById('ability4_cooldown').value = localStorage.getItem('ability4_cooldown') ?? null
-    document.getElementById('ability5_key').value = localStorage.getItem('ability5_key') ?? null
-    document.getElementById('ability5_cooldown').value = localStorage.getItem('ability5_cooldown') ?? null
-    document.getElementById('ability6_key').value = localStorage.getItem('ability6_key') ?? null
-    document.getElementById('ability6_cooldown').value = localStorage.getItem('ability6_cooldown') ?? null
 }
 
 const getSettings = () => {
