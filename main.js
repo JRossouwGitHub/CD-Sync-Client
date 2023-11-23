@@ -30,8 +30,10 @@ const createWindow = () => {
         keyPressEnabled = onTop
         if(!onTop){
             win.center()
+            win.unmaximize()
         } else {
             win.moveTop()
+            win.maximize()
         }
     })
 
@@ -39,7 +41,7 @@ const createWindow = () => {
     return win
 }
 
-app.whenReady().then(() => {
+app.on('ready', () => {
     let _win = createWindow()
     v.addListener(function (e, down) {
         if(!keyPressEnabled) return

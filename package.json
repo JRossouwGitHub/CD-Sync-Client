@@ -4,7 +4,7 @@
   "description": "A client to sync cooldowns between players.",
   "main": "main.js",
   "scripts": {
-    "start": "electron .",
+    "start": "electron --enable-transparent-visuals .",
     "package": "npx electron-packager ./ cd-sync-client --platform=win32 --arch=x64",
     "app:dir": "electron-builder --dir",
     "app:dist": "electron-builder"
@@ -22,19 +22,6 @@
   },
   "build": {
     "appId": "com.cdsync-palmtop-co-nz.app",
-    "productName": "CD Sync 1.0.0",
-    "win": {
-      "icon": "./public/icons/128x128.ico"
-    },
-    "files": [
-      "./build/**/*",
-      "./dist/**/*",
-      "./node_modules/**/*",
-      "./public/**/*",
-      "*.js"
-    ],
-    "directories": {
-      "buildResources": "public"
-    }
+    "productName": "CD Sync 1.0.0"
   }
 }
