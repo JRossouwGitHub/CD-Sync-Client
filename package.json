@@ -12,7 +12,7 @@
   "author": "Jacques Rossouw | PalmTop | Odious",
   "license": "ISC",
   "devDependencies": {
-    "electron": "^27.1.0",
+    "electron": "^26.6.1",
     "electron-builder": "^24.6.4",
     "electron-packager": "^17.1.2",
     "nodemon": "^3.0.1"
